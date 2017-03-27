@@ -31,8 +31,8 @@ namespace US.WordProcessor.Internal
       
       public Definition Define(string word)
       {
-         return KnownWords.ContainsKey(word)
-            ? KnownWords[word]
+         return KnownWords.TryGetValue(word, out var definition)
+            ? definition
             : new Definition(WordType.NotAvailable, word, "");
       }      
    }
