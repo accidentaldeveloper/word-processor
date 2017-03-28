@@ -29,13 +29,20 @@ namespace US.WordProcessor
                 var current = definitionReader.CurrentDefinition;
                 var isProperNounSuffixedByS = current.Type == WordType.ProperNoun &&
                                                  current.Suffix.Equals("s", StringComparison.CurrentCultureIgnoreCase);
-                if (isProperNounSuffixedByS && definitionReader.NextDefinition.Type == WordType.Noun)
+                if (isProperNounSuffixedByS)
                 {
-                    var currentWord = definitionReader.CurrentWord;
-                    var nextToLastCharacter = currentWord.Substring(currentWord.Length - 2, 1);
-                    if (nextToLastCharacter != "'")
+                    var nextWordIsNoun = definitionReader.NextDefinition.Type == WordType.Noun;
+                    var previousWordIsIs = definitionReader.PreviousWord.Equals("is",
+                        StringComparison.CurrentCultureIgnoreCase);
+                    if (nextWordIsNoun || previousWordIsIs)
                     {
-                        yield return new Correction(CorrectionType.OwnershipByAProperNoun, sentence.Source, currentWord);
+                        var currentWord = definitionReader.CurrentWord;
+                        var nextToLastCharacter = currentWord.Substring(currentWord.Length - 2, 1);
+                        if (nextToLastCharacter != "'")
+                        {
+                            yield return new Correction(CorrectionType.OwnershipByAProperNoun, sentence.Source, currentWord);
+                        }
+
                     }
                 }
             }
