@@ -4,31 +4,31 @@ using System.Linq;
 
 namespace US.WordProcessor
 {
-   public class Sentence   
-      : IEnumerable<string>
-   {
-      private readonly string _source;
-      
-      public Sentence(string source)
-      {
-         _source = source.Trim();         
-      }
+    public class Sentence
+       : IEnumerable<string>
+    {
+        public Sentence(string source)
+        {
+            Source = source.Trim();
+        }
 
-      public IEnumerator<string> GetEnumerator()
-      {
-         return _source.Split(' ')
-            .ToList()
-            .GetEnumerator();
-      }
+        public string Source { get; }
 
-      public override string ToString()
-      {
-         return _source;
-      }
+        public IEnumerator<string> GetEnumerator()
+        {
+            return Source.Split(' ')
+               .ToList()
+               .GetEnumerator();
+        }
 
-      IEnumerator IEnumerable.GetEnumerator()
-      {
-         return GetEnumerator();
-      }
-   }
+        public override string ToString()
+        {
+            return Source;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+    }
 }

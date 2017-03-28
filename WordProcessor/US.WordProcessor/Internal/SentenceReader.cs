@@ -5,7 +5,7 @@ using System.Linq;
 namespace US.WordProcessor.Internal
 {
    [DebuggerDisplay("Current: {Current}")]
-   internal class SentenceReader     
+   internal class SentenceReader  
    {
       private readonly List<string> _source;
       private int _index;
