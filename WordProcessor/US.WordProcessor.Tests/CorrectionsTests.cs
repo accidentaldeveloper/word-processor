@@ -55,7 +55,7 @@ namespace US.WordProcessor.Tests
         }
 
         [TestMethod]
-        public void ContractionsNeedAnApostropheIncorrect()
+        public void ContractionsNeedAnApostropheCorrect()
         {
             var p = new Paragraph("Barry doesn't own a car. The car isn't Barry's.");
             var c = CorrectionFactory.CreateCorrectionFinder()
@@ -66,16 +66,22 @@ namespace US.WordProcessor.Tests
         }
 
         [TestMethod]
-        public void ContractionsNeedAnApostropheCorrect()
+        public void ContractionsNeedAnApostropheIncorrect()
         {
             var p = new Paragraph("Barry doesnt own a car. The car isnt Barry's.");
             var c = CorrectionFactory.CreateCorrectionFinder()
                .Find(p)
                .ToList();
+
             var doesntCorrection = c[0];
             Assert.AreEqual(CorrectionType.MissingContractionApostrophe, doesntCorrection.Type);
             Assert.AreEqual("Barry doesnt own a car", doesntCorrection.Sentence);
             Assert.AreEqual("doesnt", doesntCorrection.Word);
+
+            var isntCorrection = c[1];
+            Assert.AreEqual(CorrectionType.MissingContractionApostrophe, isntCorrection.Type);
+            Assert.AreEqual("The car isnt Barry's", isntCorrection.Sentence);
+            Assert.AreEqual("isnt", isntCorrection.Word);
         }
 
         //[TestMethod]

@@ -29,7 +29,7 @@ namespace US.WordProcessor.Internal
                {"airplanes'", new Definition(WordType.Noun, "Airplane", "s")},
 
                // contractions
-               {"isnt'", new Definition(WordType.Contraction, "isn't", "")},
+               {"isnt", new Definition(WordType.Contraction, "isn't", "")},
                {"isn't'", new Definition(WordType.Contraction, "isn't", "")},
                // Sadly, our program is not sophisticated enough to distinguish between the word (correct) and the contraction without apostrophe (incorrect)
                {"wont", new Definition(WordType.Contraction, "won't", "")},

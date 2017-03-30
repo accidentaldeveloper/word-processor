@@ -38,7 +38,7 @@ namespace US.WordProcessor
         {
             var current = definitionReader.CurrentDefinition;
             var isContractionWithoutApostrophe = current.Type == WordType.Contraction &&
-                                                 !current.Word.Equals(definitionReader.CurrentWord);
+                                                 !current.Word.Equals(definitionReader.CurrentWord, StringComparison.CurrentCultureIgnoreCase);
             if (isContractionWithoutApostrophe)
             {
                 return new Correction(CorrectionType.MissingContractionApostrophe, sentence.Source, definitionReader.CurrentWord);
