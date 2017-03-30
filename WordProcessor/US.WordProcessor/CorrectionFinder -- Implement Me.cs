@@ -17,36 +17,43 @@ namespace US.WordProcessor
              *       the best way that you see fit.  Remember, design is a factor in
              *       our evaluation.
              */
-            var corrections = paragraph.SelectMany(CheckSentenceForProperNounFollowedByNoun);
-            return corrections;
+            var corrections = paragraph.SelectMany(CheckSentenceForCorrections);
+            return corrections.Where(correction => correction != null);
         }
 
-        private static IEnumerable<Correction> CheckSentenceForProperNounFollowedByNoun(Sentence sentence)
+        private static IEnumerable<Correction> CheckSentenceForCorrections(Sentence sentence)
         {
             var definitionReader = CreateDefinitionReader(sentence);
             while (definitionReader.MoveNext())
             {
-                var current = definitionReader.CurrentDefinition;
-                var isProperNounSuffixedByS = current.Type == WordType.ProperNoun &&
-                                                 current.Suffix.Equals("s", StringComparison.CurrentCultureIgnoreCase);
-                if (isProperNounSuffixedByS)
-                {
-                    var nextWordIsNoun = definitionReader.NextDefinition.Type == WordType.Noun;
-                    var previousWordIsIs = definitionReader.PreviousWord.Equals("is",
-                        StringComparison.CurrentCultureIgnoreCase);
-                    if (nextWordIsNoun || previousWordIsIs)
-                    {
-                        var currentWord = definitionReader.CurrentWord;
-                        var nextToLastCharacter = currentWord.Substring(currentWord.Length - 2, 1);
-                        if (nextToLastCharacter != "'")
-                        {
-                            yield return new Correction(CorrectionType.OwnershipByAProperNoun, sentence.Source, currentWord);
-                        }
+                var correction = CheckIfProperNounNeedsApostrophe(sentence, definitionReader);
+                yield return correction;
+            }
+        }
 
+        private static Correction CheckIfProperNounNeedsApostrophe(Sentence sentence, DefinitionReader definitionReader)
+        {
+            var current = definitionReader.CurrentDefinition;
+            var isProperNounSuffixedByS = current.Type == WordType.ProperNoun &&
+                                             current.Suffix.Equals("s", StringComparison.CurrentCultureIgnoreCase);
+            if (isProperNounSuffixedByS)
+            {
+                var nextWordIsNoun = definitionReader.NextDefinition.Type == WordType.Noun;
+                var previousWordIsIs = definitionReader.PreviousWord.Equals("is",
+                    StringComparison.CurrentCultureIgnoreCase);
+                if (nextWordIsNoun || previousWordIsIs)
+                {
+                    var currentWord = definitionReader.CurrentWord;
+                    var nextToLastCharacter = currentWord.Substring(currentWord.Length - 2, 1);
+                    if (nextToLastCharacter != "'")
+                    {
+                        return new Correction(CorrectionType.OwnershipByAProperNoun, sentence.Source, currentWord);
                     }
+
                 }
             }
 
+            return null;
         }
 
         private static DefinitionReader CreateDefinitionReader(Sentence sentence)
