@@ -27,6 +27,14 @@ namespace US.WordProcessor.Internal
                {"airplanes", new Definition(WordType.Noun, "Airplane", "s")},
                {"airplane's", new Definition(WordType.Noun, "Airplane", "s")},
                {"airplanes'", new Definition(WordType.Noun, "Airplane", "s")},
+
+               // contractions
+               {"isnt'", new Definition(WordType.Contraction, "isn't", "")},
+               {"isn't'", new Definition(WordType.Contraction, "isn't", "")},
+               {"wont", new Definition(WordType.Contraction, "won't", "")},
+               {"won't", new Definition(WordType.Contraction, "won't", "")},
+               {"doesn't", new Definition(WordType.Contraction, "doesn't", "")},
+               {"doesnt", new Definition(WordType.Contraction, "doesn't", "")},
             };
       
       public Definition Define(string word)
