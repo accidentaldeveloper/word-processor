@@ -31,6 +31,7 @@ namespace US.WordProcessor.Internal
                // contractions
                {"isnt'", new Definition(WordType.Contraction, "isn't", "")},
                {"isn't'", new Definition(WordType.Contraction, "isn't", "")},
+               // Sadly, our program is not sophisticated enough to distinguish between the word (correct) and the contraction without apostrophe (incorrect)
                {"wont", new Definition(WordType.Contraction, "won't", "")},
                {"won't", new Definition(WordType.Contraction, "won't", "")},
                {"doesn't", new Definition(WordType.Contraction, "doesn't", "")},

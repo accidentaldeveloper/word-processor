@@ -28,8 +28,25 @@ namespace US.WordProcessor
             {
                 var correction = CheckIfProperNounNeedsApostrophe(sentence, definitionReader);
                 yield return correction;
+
+                var contractionCorrection = CheckIfContractionNeedsApostrophe(sentence, definitionReader);
+                yield return contractionCorrection;
             }
         }
+
+        private static Correction CheckIfContractionNeedsApostrophe(Sentence sentence, DefinitionReader definitionReader)
+        {
+            var current = definitionReader.CurrentDefinition;
+            var isContractionWithoutApostrophe = current.Type == WordType.Contraction &&
+                                                 !current.Word.Equals(definitionReader.CurrentWord);
+            if (isContractionWithoutApostrophe)
+            {
+                return new Correction(CorrectionType.MissingContractionApostrophe, sentence.Source, definitionReader.CurrentWord);
+            }
+
+            return null;
+        }
+
 
         private static Correction CheckIfProperNounNeedsApostrophe(Sentence sentence, DefinitionReader definitionReader)
         {
