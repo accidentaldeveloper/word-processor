@@ -31,7 +31,23 @@ namespace US.WordProcessor
 
                 var contractionCorrection = CheckIfContractionNeedsApostrophe(sentence, definitionReader);
                 yield return contractionCorrection;
+
+                var normalNounCorrection = CheckIfNormalNounHasApostrophe(sentence, definitionReader);
+                yield return normalNounCorrection;
             }
+        }
+
+        private static Correction CheckIfNormalNounHasApostrophe(Sentence sentence, DefinitionReader definitionReader)
+        {
+            var current = definitionReader.CurrentDefinition;
+            var isRegularNounWithoutApostrophe = current.Type == WordType.Noun &&
+                                     !(current.Word + current.Suffix).Equals(definitionReader.CurrentWord, StringComparison.CurrentCultureIgnoreCase);
+            if (isRegularNounWithoutApostrophe)
+            {
+                return new Correction(CorrectionType.IncorrectNounApostrophe, sentence.Source, definitionReader.CurrentWord);
+            }
+
+            return null;
         }
 
         private static Correction CheckIfContractionNeedsApostrophe(Sentence sentence, DefinitionReader definitionReader)

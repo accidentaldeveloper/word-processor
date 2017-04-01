@@ -84,28 +84,28 @@ namespace US.WordProcessor.Tests
             Assert.AreEqual("isnt", isntCorrection.Word);
         }
 
-        //[TestMethod]
-        //public void RegularNounsDoNotNeedAnApostropheCorrect()
-        //{
-        //   var p = new Paragraph("Look at those airplanes over there.");
-        //   var c = CorrectionFactory.CreateCorrectionFinder()
-        //      .Find(p)
-        //      .ToList();
+        [TestMethod]
+        public void RegularNounsDoNotNeedAnApostropheCorrect()
+        {
+            var p = new Paragraph("Look at those airplanes over there.");
+            var c = CorrectionFactory.CreateCorrectionFinder()
+               .Find(p)
+               .ToList();
 
-        //   Assert.AreEqual(0, c.Count);
-        //}
+            Assert.AreEqual(0, c.Count);
+        }
 
-        //[TestMethod]
-        //public void RegularNounsDoNotNeedAnApostropheIncorrect()
-        //{
-        //   var p = new Paragraph("Look at those airplane's over there.");
-        //   var c = CorrectionFactory.CreateCorrectionFinder()
-        //      .Find(p)
-        //      .Single();
+        [TestMethod]
+        public void RegularNounsDoNotNeedAnApostropheIncorrect()
+        {
+            var p = new Paragraph("Look at those airplane's over there.");
+            var c = CorrectionFactory.CreateCorrectionFinder()
+               .Find(p)
+               .Single();
 
-        //   Assert.AreEqual(CorrectionType.IncorrectNounApostrophe, c.Type);
-        //   Assert.AreEqual("Look at those airplane's over there", c.Sentence);
-        //   Assert.AreEqual("airplane's", c.Word);
-        //}
+            Assert.AreEqual(CorrectionType.IncorrectNounApostrophe, c.Type);
+            Assert.AreEqual("Look at those airplane's over there", c.Sentence);
+            Assert.AreEqual("airplane's", c.Word);
+        }
     }
 }
