@@ -1,6 +1,6 @@
 ﻿namespace US.WordProcessor.Internal
 {
-    internal interface IDefinitionReader
+    internal interface IDefinitionState
     {
         Definition CurrentDefinition { get; }
         string CurrentWord { get; }

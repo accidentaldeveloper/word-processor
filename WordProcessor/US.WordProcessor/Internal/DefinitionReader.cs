@@ -1,6 +1,6 @@
 namespace US.WordProcessor.Internal
 {
-    internal class DefinitionReader : IDefinitionReader
+    internal class DefinitionReader : IDefinitionState
     {
         private readonly Dictionary _dictionary;
         private readonly SentenceReader _sentence;
