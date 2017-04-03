@@ -33,7 +33,6 @@ namespace US.WordProcessor.Internal
 
         public Definition PreviousDefinition => _sentence.HasPrevious
            ? _dictionary.Define(_sentence.Previous)
-           // TODO: Seems bad to return `Current` as part of the definition for Previous. 
            : new Definition(WordType.NotAvailable, _sentence.Current, "");
 
 

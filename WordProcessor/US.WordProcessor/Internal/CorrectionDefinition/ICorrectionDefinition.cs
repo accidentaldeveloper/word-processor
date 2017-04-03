@@ -1,4 +1,4 @@
-﻿namespace US.WordProcessor.Internal.Rules
+﻿namespace US.WordProcessor.Internal.CorrectionDefinition
 {
     internal interface ICorrectionDefinition
     {

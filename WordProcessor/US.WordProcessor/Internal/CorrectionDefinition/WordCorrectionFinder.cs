@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
-namespace US.WordProcessor.Internal.Rules
+namespace US.WordProcessor.Internal.CorrectionDefinition
 {
     internal class WordCorrectionFinder
     {
@@ -9,11 +10,13 @@ namespace US.WordProcessor.Internal.Rules
 
         public WordCorrectionFinder(ICorrectionDefinition[] correctionDefinitions)
         {
+            if (correctionDefinitions == null) throw new ArgumentNullException(nameof(correctionDefinitions));
             _correctionDefinitions = correctionDefinitions;
         }
 
         public IEnumerable<Correction> GetWordCorrections(IDefinitionState definitionState)
         {
+            if (definitionState == null) throw new ArgumentNullException(nameof(definitionState));
             var needCorrection =
                 _correctionDefinitions.Where(definition => definition.WordRequiresCorrection(definitionState));
             return needCorrection.Select(definition => CreateCorrection(definitionState, definition.CorrectionType));

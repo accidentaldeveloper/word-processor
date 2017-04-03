@@ -1,7 +1,6 @@
 ﻿using System;
-using US.WordProcessor.Internal.Rules;
 
-namespace US.WordProcessor.Internal
+namespace US.WordProcessor.Internal.CorrectionDefinition
 {
     class NormalNounHasApostropheCorrectionDefinition : ICorrectionDefinition
     {

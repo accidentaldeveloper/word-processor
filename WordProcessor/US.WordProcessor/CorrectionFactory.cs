@@ -1,5 +1,5 @@
 ﻿using US.WordProcessor.Internal;
-using US.WordProcessor.Internal.Rules;
+using US.WordProcessor.Internal.CorrectionDefinition;
 
 namespace US.WordProcessor
 {

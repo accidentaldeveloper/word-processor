@@ -1,6 +1,6 @@
 using System;
 
-namespace US.WordProcessor.Internal.Rules
+namespace US.WordProcessor.Internal.CorrectionDefinition
 {
     class ProperNounNeedsApostropheCorrectionDefinition : ICorrectionDefinition
     {
