@@ -2,7 +2,7 @@
 
 namespace US.WordProcessor.Internal.CorrectionDefinition
 {
-    class NormalNounHasApostropheCorrectionDefinition : ICorrectionDefinition
+    internal class NormalNounHasApostropheCorrectionDefinition : ICorrectionDefinition
     {
         public CorrectionType CorrectionType => CorrectionType.IncorrectNounApostrophe;
 

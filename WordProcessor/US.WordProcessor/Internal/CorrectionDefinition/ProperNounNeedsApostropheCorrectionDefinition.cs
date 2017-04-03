@@ -5,6 +5,7 @@ namespace US.WordProcessor.Internal.CorrectionDefinition
     class ProperNounNeedsApostropheCorrectionDefinition : ICorrectionDefinition
     {
         public CorrectionType CorrectionType => CorrectionType.OwnershipByAProperNoun;
+
         public bool WordRequiresCorrection(IDefinitionState definitionState)
         {
             var current = definitionState.CurrentDefinition;

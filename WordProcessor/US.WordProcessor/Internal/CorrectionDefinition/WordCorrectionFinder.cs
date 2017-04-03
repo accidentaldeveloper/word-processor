@@ -22,6 +22,7 @@ namespace US.WordProcessor.Internal.CorrectionDefinition
             return needCorrection.Select(definition => CreateCorrection(definitionState, definition.CorrectionType));
         }
 
-        private Correction CreateCorrection(IDefinitionState definitionState, CorrectionType correctionType) => new Correction(correctionType, definitionState.SourceString, definitionState.CurrentWord);
+        private Correction CreateCorrection(IDefinitionState definitionState, CorrectionType correctionType) => 
+            new Correction(correctionType, definitionState.SourceString, definitionState.CurrentWord);
     }
 }

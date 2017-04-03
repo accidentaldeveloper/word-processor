@@ -3,6 +3,7 @@
     internal interface ICorrectionDefinition
     {
         CorrectionType CorrectionType { get; }
+
         bool WordRequiresCorrection(IDefinitionState definitionState);
     }
 }
