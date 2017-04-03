@@ -1,6 +1,6 @@
 namespace US.WordProcessor.Internal
 {
-    internal class DefinitionReader
+    internal class DefinitionReader : IDefinitionReader
     {
         private readonly Dictionary _dictionary;
         private readonly SentenceReader _sentence;
@@ -10,6 +10,8 @@ namespace US.WordProcessor.Internal
             _dictionary = dictionary;
             _sentence = sentence;
         }
+
+        public string SourceString => _sentence.SourceString;
 
         public bool MoveNext()
         {

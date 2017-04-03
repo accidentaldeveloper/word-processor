@@ -41,6 +41,7 @@
     <Compile Include="Internal\Definition.cs" />
     <Compile Include="Internal\DefinitionReader.cs" />
     <Compile Include="Internal\Dictionary.cs" />
+    <Compile Include="Internal\IDefinitionReader.cs" />
     <Compile Include="Internal\Optional.cs" />
     <Compile Include="Paragraph.cs" />
     <Compile Include="Sentence.cs" />

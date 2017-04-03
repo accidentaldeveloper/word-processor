@@ -21,45 +21,45 @@ namespace US.WordProcessor
             var definitionReader = CreateDefinitionReader(sentence);
             while (definitionReader.MoveNext())
             {
-                var correction = CheckIfProperNounNeedsApostrophe(sentence, definitionReader);
+                var correction = CheckIfProperNounNeedsApostrophe(definitionReader);
                 yield return correction;
 
-                var contractionCorrection = CheckIfContractionNeedsApostrophe(sentence, definitionReader);
+                var contractionCorrection = CheckIfContractionNeedsApostrophe(definitionReader);
                 yield return contractionCorrection;
 
-                var normalNounCorrection = CheckIfNormalNounHasApostrophe(sentence, definitionReader);
+                var normalNounCorrection = CheckIfNormalNounHasApostrophe(definitionReader);
                 yield return normalNounCorrection;
             }
         }
 
-        private static Correction CheckIfNormalNounHasApostrophe(Sentence sentence, DefinitionReader definitionReader)
+        private static Correction CheckIfNormalNounHasApostrophe(IDefinitionReader definitionReader)
         {
             var current = definitionReader.CurrentDefinition;
             var isRegularNounWithoutApostrophe = current.Type == WordType.Noun &&
                                      !(current.Word + current.Suffix).Equals(definitionReader.CurrentWord, StringComparison.CurrentCultureIgnoreCase);
             if (isRegularNounWithoutApostrophe)
             {
-                return new Correction(CorrectionType.IncorrectNounApostrophe, sentence.Source, definitionReader.CurrentWord);
+                return new Correction(CorrectionType.IncorrectNounApostrophe, definitionReader.SourceString, definitionReader.CurrentWord);
             }
 
             return null;
         }
 
-        private static Correction CheckIfContractionNeedsApostrophe(Sentence sentence, DefinitionReader definitionReader)
+        private static Correction CheckIfContractionNeedsApostrophe(IDefinitionReader definitionReader)
         {
             var current = definitionReader.CurrentDefinition;
             var isContractionWithoutApostrophe = current.Type == WordType.Contraction &&
                                                  !current.Word.Equals(definitionReader.CurrentWord, StringComparison.CurrentCultureIgnoreCase);
             if (isContractionWithoutApostrophe)
             {
-                return new Correction(CorrectionType.MissingContractionApostrophe, sentence.Source, definitionReader.CurrentWord);
+                return new Correction(CorrectionType.MissingContractionApostrophe, definitionReader.SourceString, definitionReader.CurrentWord);
             }
 
             return null;
         }
 
 
-        private static Correction CheckIfProperNounNeedsApostrophe(Sentence sentence, DefinitionReader definitionReader)
+        private static Correction CheckIfProperNounNeedsApostrophe(IDefinitionReader definitionReader)
         {
             var current = definitionReader.CurrentDefinition;
             var isProperNounSuffixedByS = current.Type == WordType.ProperNoun &&
@@ -75,7 +75,7 @@ namespace US.WordProcessor
                     var nextToLastCharacter = currentWord.Substring(currentWord.Length - 2, 1);
                     if (nextToLastCharacter != "'")
                     {
-                        return new Correction(CorrectionType.OwnershipByAProperNoun, sentence.Source, currentWord);
+                        return new Correction(CorrectionType.OwnershipByAProperNoun, definitionReader.SourceString, currentWord);
                     }
 
                 }
