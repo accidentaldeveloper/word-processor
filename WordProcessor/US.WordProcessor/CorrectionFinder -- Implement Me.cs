@@ -12,11 +12,6 @@ namespace US.WordProcessor
 
         public IEnumerable<Correction> Find(Paragraph paragraph)
         {
-            /* NOTE: Please feel feel to add / remove / modify any classes in 
-             *       this solution in order to implement the requested functionality
-             *       the best way that you see fit.  Remember, design is a factor in
-             *       our evaluation.
-             */
             var corrections = paragraph.SelectMany(CheckSentenceForCorrections);
             return corrections.Where(correction => correction != null);
         }
